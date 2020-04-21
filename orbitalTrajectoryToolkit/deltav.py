@@ -14,7 +14,7 @@ class deltav():
         self.window.title("Delta-V Calculator")
 
         # Stages Selector
-        tkinter.Label(self.window, text="Number of Stage").grid(row=0, column=0, padx=5, pady=2)
+        tkinter.Label(self.window, text="Number of Stages").grid(row=0, column=0, padx=5, pady=2)
         stages = tkinter.Entry(self.window, width=8)
         stages.grid(row=0, column=1, padx=5, pady=2)
         tkinter.Button(self.window, text="Enter", command=lambda x=0: self.inputs(self.checknum(stages.get())))\
