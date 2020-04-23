@@ -74,7 +74,6 @@ class deltav_gui:
         return self
 
     def calculate(self):
-        print(str(self.window.input_values.get()))
         print("pong!")
         return self
 
