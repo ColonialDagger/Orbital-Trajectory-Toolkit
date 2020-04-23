@@ -5,7 +5,7 @@ from.tools import helpers
 
 
 class deltav_gui:
-    def __init__(self):
+    def __init__(self):  # Initializers variables, creates stage entry GUI
 
         # Configurable Headers
         self.input_headers = ["Stages",
@@ -15,7 +15,7 @@ class deltav_gui:
                               "Thrust Force (kN)",
                               "Thrust Rate (kg/s)"]
         self.output_headers = [""]
-        self.inputs = {} # Leave blank, replace by input field
+        self.inputs = {}  # Leave blank, replace by input field
 
         # Other Variables
         self.input_lf = None
@@ -36,7 +36,7 @@ class deltav_gui:
 
         tkinter.mainloop()
 
-    def input_frame(self):
+    def input_frame(self):  # Creates input label frame to display entry table
 
         try:  # Used to catch ValueErrors in stage entry
             stages = helpers.positive_int(self.stages.get())
@@ -61,7 +61,6 @@ class deltav_gui:
         # Input Section
         counter = 0
         for row in range(stages):
-            print(str(row))
             tkinter.Label(self.window.input_lf, text=str(row+1)).grid(row=row+2, column=0)
             for col in range(len(self.input_headers)-1):
                 self.inputs[counter] = tkinter.Entry(self.window.input_lf, width=8)
@@ -73,9 +72,21 @@ class deltav_gui:
 
         return self
 
-    def calculate(self):
-        for i in self.inputs:
-            self.inputs[i] = str(self.inputs[i].get())
+    def calculate(self):  # Gets inputs from entry field, sorts properly, and returns any calculable values for outputs
+        input_values = []
+        for i in self.inputs:  # Gets all inputs as strings or integers, as necessary
+            if i % (len(self.input_headers) - 1) == 0:
+                input_values.append(str(self.inputs[i].get()))
+            elif self.inputs[i].get() is None:
+                input_values.append(0)
+            else:
+                try:
+                    input_values.append(int(self.inputs[i].get()))
+                except ValueError:
+                    input_values.append(0)
 
-        print(self.inputs)
+        # Finds input headers width to split array into rows
+        n = len(self.input_headers)-1
+        input_values = [input_values[i * n:(i + 1) * n] for i in range((len(input_values) + n - 1) // n)]
+
         return self
