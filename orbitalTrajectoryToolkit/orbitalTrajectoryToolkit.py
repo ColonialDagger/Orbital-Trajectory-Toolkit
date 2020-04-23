@@ -1,6 +1,6 @@
 import tkinter
 import tkinter.font
-from orbitalTrajectoryToolkit.deltav import deltav
+from orbitalTrajectoryToolkit.deltav_gui import deltav_gui
 
 
 class ottGUI:  # Main GUI
@@ -14,9 +14,9 @@ class ottGUI:  # Main GUI
 
         # Vehicle Statistics
         lf_vic = tkinter.LabelFrame(self.window, text="Vehicle Statistics", font=headerstyle)
-        lf_vic.pack()
+        lf_vic.pack(padx=5, pady=2)
         for string, command, state in [
-            ["Delta-V Calculator", deltav, "normal"],
+            ["Delta-V Calculator", deltav_gui, "normal"],
             ["Thrust to Weight Ratio", (), "disabled"]
         ]:
             tkinter.Button(lf_vic, text=string, command=command, state=state, font=fontstyle)\
@@ -24,7 +24,7 @@ class ottGUI:  # Main GUI
 
         # Orbital Trajectory Simulations
         lf_tjc = tkinter.LabelFrame(self.window, text="Orbital Trajectory Simulations", font=headerstyle)
-        lf_tjc.pack()
+        lf_tjc.pack(padx=5, pady=2)
         for string, command, state in [
             ["Single Body Trajectory", (), "disabled"],
             ["Orbiting Moons Trajectory", (), "disabled"],
@@ -36,7 +36,7 @@ class ottGUI:  # Main GUI
 
         # Orbital Maneuver Calculators
         lf_orm = tkinter.LabelFrame(self.window, text="Orbital Maneuver Calculators", font=headerstyle)
-        lf_orm.pack()
+        lf_orm.pack(padx=5, pady=2)
         for string, command, state in [
             ["Planetary Transfer", (), "disabled"],
             ["Hohmann Transfer", (), "disabled"],
@@ -50,7 +50,7 @@ class ottGUI:  # Main GUI
 
         # Ascent Guidance
         lf_asc = tkinter.LabelFrame(self.window, text="Ascent Guidance", font=headerstyle)
-        lf_asc.pack()
+        lf_asc.pack(padx=5, pady=2)
         for string, command, state in [
             ["Launch Trajectory Guidance", lambda x=0: print("disabled"), "disabled"],
             ["Max-Q Curve", lambda x=0: print("disabled"), "disabled"]
