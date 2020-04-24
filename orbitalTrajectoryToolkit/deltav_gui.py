@@ -135,17 +135,22 @@ class deltav_gui:
                 vaccdv = calculations.deltav(input_values[i][1], input_values[i][2], input_values[i][4], 0)
             except ValueError:
                 messagebox.showerror("Error", "Wet mass must be larger than dry mass!")
+                return
             except ZeroDivisionError:
                 atmodv = 0
                 vaccdv = 0
 
             # TODO: Calculate burn times
 
-            atmodt = None
-            vaccdt = None
+            atmodt = 0
+            vaccdt = 0
 
-            output = [stage, label, twr, atmodv, vaccdv, atmodt, vaccdt]
+            output = [stage, label, twr, atmodv, atmodt, vaccdv, vaccdt]
 
-            # TODO: Publish output label to window using output
+            n = 0
+            for string in output:
+                label = tkinter.Label(self.output_lf, text=str(string))
+                label.grid(row=i+1, column=n)
+                n += 1
 
         return self
