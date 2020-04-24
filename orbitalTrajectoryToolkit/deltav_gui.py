@@ -149,7 +149,7 @@ class deltav_gui:
 
             n = 0
             for string in output:  # Outputs values into label in row
-                if string == 0:
+                if string == 0:  # Replaces 0's with empty string
                     string = ''
                 label = tkinter.Label(self.output_lf, text=string)
                 label.grid(row=i+1, column=n)
