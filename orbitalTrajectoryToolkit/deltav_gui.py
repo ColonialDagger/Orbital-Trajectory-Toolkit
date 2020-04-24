@@ -39,6 +39,7 @@ class deltav_gui:
         # Stages Selector
         tkinter.Label(self.window, text="Number of Stages").grid(row=0, column=0, padx=5, pady=2)
         self.stages = tkinter.Entry(self.window, width=8)
+        self.stages.bind("<Return>", lambda x=0: self.input_frame())
         self.stages.grid(row=0, column=1, padx=5, pady=2)
         tkinter.Button(
             self.window,
@@ -77,6 +78,7 @@ class deltav_gui:
             tkinter.Label(self.window.input_lf, text=str(row+1)).grid(row=row+2, column=0)
             for col in range(len(self.input_headers)-1):
                 self.inputs[counter] = tkinter.Entry(self.window.input_lf, width=8)
+                self.inputs[counter].bind("<Return>", lambda x=0: self.calculate())
                 self.inputs[counter].grid(row=row+2, column=col+1)
                 counter += 1
 
