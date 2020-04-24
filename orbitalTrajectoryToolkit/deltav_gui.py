@@ -12,13 +12,25 @@ class deltav_gui:
                               "Label",
                               "Wet Mass (kg)",
                               "Dry Mass (kg)",
-                              "Thrust Force (kN)",
-                              "Thrust Rate (kg/s)"]
-        self.output_headers = [""]
+                              "Atmo. ISP (m/s)",
+                              "Vac. ISP (m/s)",
+                              "Gravitational Force (m/s²)",
+                              "Thrust Force (kN)"]
+        self.output_headers = [
+            "Stage",
+            "Label",
+            "TWR",
+            "Atmo ΔV (m/s)",
+            "Atmo. Burn Time (s)",
+            "Vac. ΔV (m/s)",
+            "Vac. Burn Time (s)"
+        ]
         self.inputs = {}  # Leave blank, replace by input field
 
         # Other Variables
         self.input_lf = None
+        self.output_lf = None
+        self.stages_val = None
 
         # Defines Toplevel if run in main
         self.window = tkinter.Toplevel()
@@ -40,6 +52,7 @@ class deltav_gui:
 
         try:  # Used to catch ValueErrors in stage entry
             stages = helpers.positive_int(self.stages.get())
+            self.stages_val = stages
         except ValueError or TypeError:
             messagebox.showerror("Error", "Stage entry must be a positive integer")
             return
@@ -55,7 +68,7 @@ class deltav_gui:
 
         col = 0
         for i in self.input_headers:
-            tkinter.Label(self.window.input_lf, text=i).grid(row=1, column=col, padx=5, pady=2)
+            tkinter.Label(self.window.input_lf, text=i).grid(row=0, column=col, padx=5, pady=2)
             col += 1
 
         # Input Section
@@ -81,12 +94,58 @@ class deltav_gui:
                 input_values.append(0)
             else:
                 try:
-                    input_values.append(int(self.inputs[i].get()))
+                    tmp = float(self.inputs[i].get())
+                    if tmp < 0:  # Check for negatives
+                        messagebox.showerror("Error", "All input values must be positive!")
+                        return
+                    input_values.append(tmp)
                 except ValueError:
                     input_values.append(0)
 
         # Finds input headers width to split array into rows
         n = len(self.input_headers)-1
         input_values = [input_values[i * n:(i + 1) * n] for i in range((len(input_values) + n - 1) // n)]
+
+        try:  # Clears pre-existing label frames
+            self.output_lf.grid_forget()
+        except AttributeError:
+            pass
+
+        # Build output Labelframe
+        self.output_lf = tkinter.LabelFrame(self.window, text="Results")
+        self.output_lf.grid(row=3, column=0, columnspan=3, padx=5, pady=2)
+
+        # Publish header labels
+        col = 0
+        for i in self.output_headers:
+            tkinter.Label(self.output_lf, text=i).grid(row=0, column=col, padx=5, pady=2)
+            col += 1
+
+        # Find solutions for each resulting cell, this added outputs must be configured here to calculate!
+        for i in range(self.stages_val):
+            stage = i + 1  # Stage label
+            label = input_values[i][0]  # Text Label
+            try:  # TWR label
+                twr = calculations.twr(input_values[i][6], input_values[i][2], input_values[i][5])
+            except ZeroDivisionError:
+                twr = 0
+
+            try:  # deltaV labels
+                atmodv = calculations.deltav(input_values[i][1], input_values[i][2], input_values[i][3], 0)
+                vaccdv = calculations.deltav(input_values[i][1], input_values[i][2], input_values[i][4], 0)
+            except ValueError:
+                messagebox.showerror("Error", "Wet mass must be larger than dry mass!")
+            except ZeroDivisionError:
+                atmodv = 0
+                vaccdv = 0
+
+            # TODO: Calculate burn times
+
+            atmodt = None
+            vaccdt = None
+
+            output = [stage, label, twr, atmodv, vaccdv, atmodt, vaccdt]
+
+            # TODO: Publish output label to window using output
 
         return self
