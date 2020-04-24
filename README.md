@@ -5,9 +5,11 @@ The Orbital Trajectory Toolkit is a Python-based desktop program that performs v
 Current Features:
 * N/A
 
-Planned Features:
+In-Progress:
 * Delta-V Calculator
 * Thrust to Weight Ratio (TWR) Calculator
+
+Planned Features:
 * Single Body Trajectory Simulation
 * Orbiting Moons Trajectory Simulation
 * N-Body Trajectory Simulation
