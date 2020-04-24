@@ -8,9 +8,9 @@ Current Features:
 
 In-Progress:
 * Burn Time Calculator
+* Single Body Trajectory Simulation
 
 Planned Features:
-* Single Body Trajectory Simulation
 * Orbiting Moons Trajectory Simulation
 * N-Body Trajectory Simulation
 * Orbital Decay Trajectory Simulation
