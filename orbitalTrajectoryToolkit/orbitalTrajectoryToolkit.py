@@ -13,11 +13,10 @@ class ottGUI:  # Main GUI
         fontstyle = tkinter.font.Font(family="Consolas", size=9)
 
         # Vehicle Statistics
-        lf_vic = tkinter.LabelFrame(self.window, text="Vehicle Statistics", font=headerstyle)
+        lf_vic = tkinter.LabelFrame(self.window, text="Vehicle Information", font=headerstyle)
         lf_vic.pack(padx=5, pady=2)
         for string, command, state in [
-            ["Delta-V Calculator", deltav_gui, "normal"],
-            ["Thrust to Weight Ratio", (), "disabled"]
+            ["ΔV/TWR/ΔT Calculator", deltav_gui, "normal"]
         ]:
             tkinter.Button(lf_vic, text=string, command=command, state=state, font=fontstyle)\
                 .pack(fill="x", padx=5, pady=2)
