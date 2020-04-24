@@ -148,8 +148,10 @@ class deltav_gui:
             output = [stage, label, twr, atmodv, atmodt, vaccdv, vaccdt]
 
             n = 0
-            for string in output:
-                label = tkinter.Label(self.output_lf, text=str(string))
+            for string in output:  # Outputs values into label in row
+                if string == 0:
+                    string = ''
+                label = tkinter.Label(self.output_lf, text=string)
                 label.grid(row=i+1, column=n)
                 n += 1
 
