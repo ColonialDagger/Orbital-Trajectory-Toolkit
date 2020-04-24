@@ -53,9 +53,11 @@ class deltav_gui:
 
         try:  # Used to catch ValueErrors in stage entry
             stages = helpers.positive_int(self.stages.get())
+            if stages > 10:
+                raise ValueError
             self.stages_val = stages
         except ValueError or TypeError:
-            messagebox.showerror("Error", "Stage entry must be a positive integer")
+            messagebox.showerror("Error", "Stage entry must be a positive integer under 10")
             return
 
         try:  # Clears pre-existing label frames
