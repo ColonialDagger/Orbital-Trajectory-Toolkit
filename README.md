@@ -8,6 +8,7 @@ Current Features:
 In-Progress:
 * Delta-V Calculator
 * Thrust to Weight Ratio (TWR) Calculator
+* Burn Time Calculator
 
 Planned Features:
 * Single Body Trajectory Simulation
