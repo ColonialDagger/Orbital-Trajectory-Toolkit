@@ -40,13 +40,13 @@ class singleTraj_gui:
 
         # Time Settings
         tkinter.Label(timelf, text="Start Time", font=fontstyle).grid(row=0, column=0)
-        tkinter.Entry(timelf, text="Placeholder", font=fontstyle).grid(row=1, column=0)  # TODO: Replace with datetime input
-        tkinter.Label(timelf, text=" ").grid(row=2, column=0)  # Spacer
-        tkinter.Label(timelf, text="End Time", font=fontstyle).grid(row=3, column=0)
-
         r = tkinter.IntVar()
-        tkinter.Radiobutton(timelf, text="Current time", variable=r, value=0, font=fontstyle).grid(row=4, column=0)
-        tkinter.Radiobutton(timelf, text="Custom time", variable=r, value=1, font=fontstyle).grid(row=4, column=1)
+        tkinter.Radiobutton(timelf, text="Current time", variable=r, value=0, font=fontstyle).grid(row=1, column=0)
+        tkinter.Radiobutton(timelf, text="Custom time", variable=r, value=1, font=fontstyle).grid(row=1, column=1)
+
+        tkinter.Entry(timelf, text="Placeholder", font=fontstyle).grid(row=2, column=0)  # TODO: Replace with datetime input
+        tkinter.Label(timelf, text=" ").grid(row=3, column=0)  # Spacer
+        tkinter.Label(timelf, text="End Time", font=fontstyle).grid(row=4, column=0)
 
         start_date = datetime.datetime.now()
 
@@ -55,6 +55,12 @@ class singleTraj_gui:
         window.mainloop()
 
         return
+
+    def timeinput_create(self):  # TODO: Create custom time input
+        pass
+
+    def timeinput_destroy(self):  # TODO: Function to destroy custom time input when needed
+        pass
 
     def sim(self, body):
         pass
