@@ -1,6 +1,7 @@
 import tkinter
 import tkinter.font
 from orbitalTrajectoryToolkit.deltav_gui import deltav_gui
+from orbitalTrajectoryToolkit.singleTraj_gui import singleTraj_gui
 
 
 class ottGUI:  # Main GUI
@@ -25,7 +26,7 @@ class ottGUI:  # Main GUI
         lf_tjc = tkinter.LabelFrame(self.window, text="Orbital Trajectory Simulations", font=headerstyle)
         lf_tjc.pack(padx=5, pady=2)
         for string, command, state in [
-            ["Single Body Trajectory", (), "disabled"],
+            ["Single Body Trajectory", singleTraj_gui, "normal"],
             ["Orbiting Moons Trajectory", (), "disabled"],
             ["N-Body Trajectory", (), "disabled"],
             ["Orbital Decay Trajectory", (), "disabled"]
